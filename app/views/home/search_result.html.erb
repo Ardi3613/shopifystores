@@ -1,0 +1,73 @@
+<div class="container mb-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 mt-5">
+        <%= search_form_for @q, url: search_result_path do |f| %>
+          <div class="row no-gutters align-items-center">
+            <div class="col">
+              <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: "Search" %>
+            </div>
+            <div class="col-auto">
+              <button class="ml-2 btn btn-lg btn-secondary search-button" type="submit">Go</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 text-center mb-2">
+      <h1><b>Search results</b></h1>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-sm-6">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 ml-auto mr-auto pb-1 text-center">
+          <h5 class="alert alert-info"><%= @stores.count %> results found for "<%= @keywords[:title] %>"</h5>
+        </div>
+      </div>
+      <div class="row">
+        <%# index = 1 %>
+        <%# @stores.each_with_index do |store, index| %>
+          <%# index =+ 1 %>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Url</th>
+                <th scope="col">Title</th>
+                <th scope="col">Industry</th>
+                <th scope="col">Top Selling Url</th>
+                <th scope="col">Facebook Url</th>
+                <th scope="col">Pintrest Url</th>
+                <th scope="col">Twitter Url</th>
+                <th scope="col">Instagram Url</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @stores.each_with_index do |store, index| %>
+                <tr>
+                  <th scope="row"><%= index %></th>
+                  <td><%= link_to nil, store.url, target: "_blank" %></td>
+                  <td><%= store.title %></td>
+                  <td><%= store.industry %></td>
+                  <td><%= link_to nil, store.top_selling_url, target: "_blank" %></td>
+                  <td><%= link_to nil, store.facebook_url, target: "_blank" %></td>
+                  <td><%= link_to nil, store.pintrest_url, target: "_blank" %></td>
+                  <td><%= link_to nil, store.twitter_url, target: "_blank" %></td>
+                  <td><%= link_to nil, store.instagram_url, target: "_blank" %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</div>
