@@ -2,10 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   namespace :admin do
+    resources :shopify_stores
     resources :users
-    resources :announcements
-    resources :notifications
-    resources :services
 
     root to: "users#index"
   end
