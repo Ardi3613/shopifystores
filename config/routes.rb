@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
   get '/search_result', to: 'home#search_result'
+  get '/import_form', to: 'home#import_form'
+  post '/import_stores', to: 'home#import_stores'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

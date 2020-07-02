@@ -1,3 +1,5 @@
+require 'activerecord-import/base'
+require 'csv'
 class HomeController < ApplicationController
   def index
     @q = ShopifyStore.ransack(params[:q])
@@ -13,6 +15,23 @@ class HomeController < ApplicationController
     @keywords = params[:q]
     @q = ShopifyStore.ransack(@keywords)
     @stores = @q.result(distinct: true)
+  end
+
+  def import_form
+  end
+
+  def import_stores
+    file = params[:file]
+    stores = []
+    CSV.foreach(file, headers: true) do |row|
+      stores << ShopifyStore.new(row.to_h)
+    end
+    if ShopifyStore.import(stores)
+      flash[:notice] = "#{stores.count} stores have been imported successfully"
+    else
+      flash[:alert] = 'an error occurred while importing cities'
+    end
+    redirect_to root_path
   end
 
 end

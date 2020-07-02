@@ -73,3 +73,4 @@ gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
 gem 'whenever', require: false
 gem 'mechanize'
 gem 'ransack'
+gem 'activerecord-import'
