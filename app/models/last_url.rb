@@ -1,0 +1,2 @@
+class LastUrl < ApplicationRecord
+end

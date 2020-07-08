@@ -74,3 +74,4 @@ gem 'whenever', require: false
 gem 'mechanize'
 gem 'ransack'
 gem 'activerecord-import'
+gem 'kaminari'

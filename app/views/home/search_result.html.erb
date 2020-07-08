@@ -30,11 +30,16 @@
           <h5 class="alert alert-info"><%= @stores.count %> results found for "<%= @keywords[:title] %>"</h5>
         </div>
       </div>
+      <div class="kaminari mb-0 pb-3">
+        <div class="row justify-content-center">
+          <%= paginate @stores %>
+        </div>
+      </div>
       <div class="row">
         <%# index = 1 %>
         <%# @stores.each_with_index do |store, index| %>
           <%# index =+ 1 %>
-          <div class="table-responsive">
+          <div class="table-responsive pt-0 mt-0">
             <table class="table">
               <thead>
               <tr>
@@ -52,7 +57,7 @@
               <tbody>
               <% @stores.each_with_index do |store, index| %>
                 <tr>
-                  <th scope="row"><%= index %></th>
+                  <th scope="row"><%= index + 1 %></th>
                   <td><%= link_to nil, store.url, target: "_blank" %></td>
                   <td><%= store.title %></td>
                   <td><%= store.industry %></td>
@@ -67,6 +72,11 @@
             </table>
           </div>
         <%# end %>
+      </div>
+      <div class="pt-3 kaminari">
+        <div class="row justify-content-center mb-5">
+          <%= paginate @stores %>
+        </div>
       </div>
     </div>
   </div>

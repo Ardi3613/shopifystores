@@ -5,14 +5,19 @@ class ScraperService
   USER_AGENTS = %w('Linux Firefox' 'Linux Konqueror' 'Linux Mozilla' 'Mac Firefox' 'Mac Mozilla' 'Mac Safari 4' 'Mac Safari' 'Windows Chrome' 'Windows IE 6' 'Windows IE 7' 'Windows IE 8' 'Windows IE 9' 'Windows IE 10' 'Windows IE 11' 'Windows Edge' 'Windows Mozilla' 'Windows Firefox' 'iPhone' 'iPad' 'Android' )
 
   def scrape_links_website
+    if LastUrl.count < 1
+      LastUrl.create(url: "https://myip.ms/browse/sites/6/ownerID/376714/ownerIDii/376714/sort/1/asc/1#sites_tbl_top")
+    end
     puts 'clearing store'
-    ShopifyStore.destroy_all
+    # ShopifyStore.destroy_all
     puts 'All stores cleared'
     puts '**********************************Started Scraping******************************************'
     all_links = []
     domain = "https://myip.ms/browse/sites/"
     remaining_link = "/ownerID/376714/ownerIDii/376714/sort/1/asc/1#sites_tbl_top"
-    (1..4607).each do |index|
+    top_url_number = LastUrl.last.url.split('https://myip.ms/browse/sites/')[1].split('/ownerID')[0].to_i
+    top_url_number += 1
+    (top_url_number..4607).each do |index|
       link = domain + index.to_s + remaining_link
       all_links << link
     end
@@ -23,7 +28,13 @@ class ScraperService
       puts '***********************************************************************************'
       puts "Number: #{index + 1}"
       puts "Visiting link: #{link}"
-      scrap(link, agent)
+      res = scrap(link, agent)
+      if res.blank?
+        puts '-----------------------------------------------------------------------------------'
+        puts 'exiting because url is not accessed'
+        puts '-----------------------------------------------------------------------------------'
+        break
+      end
       puts "finished: #{link}"
       puts '***********************************************************************************'
     end
@@ -31,12 +42,16 @@ class ScraperService
   end
 
   def scrap(url, agent)
+    top_url_number = url.split('https://myip.ms/browse/sites/')[1].split('/ownerID')[0]
     response = agent.get(url)
     links = response.css('#sites_tbl').css('tbody').css('tr > .row_name')
+    if links.present?
+      LastUrl.last.update(url: url)
+    end
     links.each_with_index do |link, index|
       begin
         url = link.css('a').text
-        puts "######################  Number: #{index + 1} out of #{links.count} #############################"
+        puts "###################### page: #{top_url_number} , Number: #{index + 1} out of #{links.count} #############################"
         puts "url is #{url}"
         complete_url = 'https://' + url
         single_site_response = agent.get(complete_url)

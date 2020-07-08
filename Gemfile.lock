@@ -377,6 +377,7 @@ DEPENDENCIES
   friendly_id (~> 5.2, >= 5.2.5)
   gravatar_image_tag!
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.2)
   mechanize
   mini_magick (~> 4.9, >= 4.9.2)
