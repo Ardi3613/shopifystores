@@ -1,6 +1,6 @@
 require 'csv'
 require 'activerecord-import/base'
-file = "#{Rails.root}/public/stores_data.csv"
+file = "#{Rails.root}/public/stores_data_50001_to_75109.csv"
 
 namespace :stores do
   desc 'Export stores'
@@ -9,7 +9,7 @@ namespace :stores do
 
     columns = %w(url industry title top_selling_url instagram_url facebook_url pintrest_url twitter_url)
     CSV.open(file, 'w', write_headers: true, headers: columns) do |writer|
-      ShopifyStore.all.each do |store|
+      ShopifyStore.last(25109).each do |store|
         writer << [store.url, store.industry, store.title, store.instagram_url, store.top_selling_url, store.facebook_url, store.pintrest_url, store.twitter_url ]
       end
     end
