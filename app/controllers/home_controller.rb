@@ -13,9 +13,10 @@ class HomeController < ApplicationController
 
   def search_result
     @keywords = params[:q]
-    @q = ShopifyStore.ransack(@keywords)
+    @q = ShopifyStore.ransack({ url_i_cont_all: params[:q][:url] })
     @total_stores = @q.result(distinct: true)
     @stores = @total_stores.page(params[:page]).per(25)
+    @page = params[:page] || 1
   end
 
   def import_form

@@ -15,7 +15,7 @@ class ScraperService
     all_links = []
     domain = "https://myip.ms/browse/sites/"
     remaining_link = "/ownerID/376714/ownerIDii/376714/sort/1/asc/1#sites_tbl_top"
-    top_url_number = LastUrl.last.url.split('https://myip.ms/browse/sites/')[1].split('/ownerID')[0].to_i
+    top_url_number = LastUrl.first.url.split('https://myip.ms/browse/sites/')[1].split('/ownerID')[0].to_i
     top_url_number += 1
     (top_url_number..4607).each do |index|
       link = domain + index.to_s + remaining_link
@@ -46,7 +46,7 @@ class ScraperService
     response = agent.get(url)
     links = response.css('#sites_tbl').css('tbody').css('tr > .row_name')
     if links.present?
-      LastUrl.last.update(url: url)
+      LastUrl.first.update(url: url)
     end
     links.each_with_index do |link, index|
       begin

@@ -55,9 +55,10 @@
               </tr>
               </thead>
               <tbody>
+              <%# count = ((params[:page] || 1).to_i - 1) * 10 %>
               <% @stores.each_with_index do |store, index| %>
                 <tr>
-                  <th scope="row"><%= index + 1 %></th>
+                  <th scope="row"><%= (@page.to_i - 1) * 25 + index+1 %></th>
                   <td><%= link_to nil, store.url, target: "_blank" %></td>
                   <td><%= store.title %></td>
                   <td><%= store.industry %></td>
