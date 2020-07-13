@@ -12,7 +12,7 @@
       <%= search_form_for @q, url: search_result_path do |f| %>
         <div class="row no-gutters align-items-center">
           <div class="col">
-            <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: "Search" %>
+            <%= f.text_field :url, class: 'form-control form-control-lg', placeholder: "Search" %>
           </div>
           <div class="col-auto">
             <button class="ml-2 btn btn-lg btn-secondary search-button" type="submit">Go</button>
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <%#  (650..900).each do |index| %>
+  <%#  (1750..2000).each do |index| %>
 <!--    <h6>-->
 <!--      <a href="https://myip.ms/browse/sites/<%#= index %>/ownerID/376714/ownerIDii/376714/sort/1/asc/1" target="_blank">https://myip.ms/browse/sites/<%#= index %>/ownerID/376714/ownerIDii/376714/sort/1/asc/1</a>-->
 <!--    </h6>-->
