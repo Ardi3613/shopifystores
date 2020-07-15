@@ -59,14 +59,14 @@
               <% @stores.each_with_index do |store, index| %>
                 <tr>
                   <th scope="row"><%= (@page.to_i - 1) * 25 + index+1 %></th>
-                  <td><%= link_to nil, store.url, target: "_blank" %></td>
+                  <td><%= link_to store.url, "https://#{store.url}", target: "_blank" %></td>
                   <td><%= store.title %></td>
                   <td><%= store.industry %></td>
-                  <td><%= link_to nil, store.top_selling_url, target: "_blank" %></td>
-                  <td><%= link_to nil, store.facebook_url, target: "_blank" %></td>
-                  <td><%= link_to nil, store.pintrest_url, target: "_blank" %></td>
-                  <td><%= link_to nil, store.twitter_url, target: "_blank" %></td>
-                  <td><%= link_to nil, store.instagram_url, target: "_blank" %></td>
+                  <td><%= link_to store.top_selling_url, "https://#{store.top_selling_url}", target: "_blank" %></td>
+                  <td><%= link_to store.facebook_url, store.facebook_url, target: "_blank" %></td>
+                  <td><%= link_to store.pintrest_url, store.pintrest_url, target: "_blank" %></td>
+                  <td><%= link_to store.twitter_url, store.twitter_url, target: "_blank" %></td>
+                  <td><%= link_to store.instagram_url, store.instagram_url, target: "_blank" %></td>
                 </tr>
               <% end %>
               </tbody>
