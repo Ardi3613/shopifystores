@@ -62,11 +62,12 @@
                   <td><%= link_to store.url, "https://#{store.url}", target: "_blank" %></td>
                   <td><%= store.title %></td>
                   <td><%= store.industry %></td>
-                  <td><%= link_to store.top_selling_url, "https://#{store.top_selling_url}", target: "_blank" %></td>
+                  <td><%= link_to store.instagram_url, store.instagram_url, target: "_blank" %></td>
                   <td><%= link_to store.facebook_url, store.facebook_url, target: "_blank" %></td>
                   <td><%= link_to store.pintrest_url, store.pintrest_url, target: "_blank" %></td>
                   <td><%= link_to store.twitter_url, store.twitter_url, target: "_blank" %></td>
-                  <td><%= link_to store.instagram_url, store.instagram_url, target: "_blank" %></td>
+                  <td><%= link_to store.top_selling_url, "https://#{store.top_selling_url}", target: "_blank" %></td>
+
                 </tr>
               <% end %>
               </tbody>
